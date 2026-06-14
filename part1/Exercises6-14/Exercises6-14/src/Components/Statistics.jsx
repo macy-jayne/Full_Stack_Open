@@ -1,4 +1,4 @@
-import Count from './Count'
+import StatsLine from './StatsLine'
 
 const Statistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad
@@ -10,12 +10,12 @@ const Statistics = ({good, neutral, bad}) => {
     <div>
       <h2>Statistics</h2>
       <div>
-        <Count text='Good' count={good}/>
-        <Count text='Neutral' count={neutral}/>
-        <Count text='Bad' count={bad}/>
-        <p>Total Count: {total}</p>
-        <p>Average: {avg}</p>
-        <p>Positive: {pos}%</p>
+        <StatsLine text='Good' stat={good}/>
+        <StatsLine text='Neutral' stat={neutral}/>
+        <StatsLine text='Bad' stat={bad}/>
+        <StatsLine text='Total Count' stat={total}/>
+        <StatsLine text='Average' stat={avg}/>
+        <StatsLine text='Positive' stat={pos}/>
       </div>
     </div> :
     <div><p>No feedback given</p></div>

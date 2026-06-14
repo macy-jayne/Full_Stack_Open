@@ -6,6 +6,7 @@ const Statistics = ({good, neutral, bad}) => {
   const pos = total > 0 ? good / (good + neutral + bad) * 100 : 0
 
   return (
+    (total > 0 ?
     <div>
       <h2>Statistics</h2>
       <div>
@@ -16,8 +17,9 @@ const Statistics = ({good, neutral, bad}) => {
         <p>Average: {avg}</p>
         <p>Positive: {pos}%</p>
       </div>
-    </div>
-  )
+    </div> :
+    <div><p>No feedback given</p></div>
+    ))
 }
 
 export default Statistics

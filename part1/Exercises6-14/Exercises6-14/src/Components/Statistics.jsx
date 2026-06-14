@@ -2,8 +2,8 @@ import Count from './Count'
 
 const Statistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad
-  const avg = total > 0 ? (good - bad) / (good + neutral + bad) : 0
-  const pos = total > 0 ? good / (good + neutral + bad) * 100 : 0
+  const avg = (good - bad) / (good + neutral + bad)
+  const pos = good / (good + neutral + bad) * 100
 
   return (
     (total > 0 ?

@@ -1,7 +1,7 @@
 import '../CSS/Button.css'
 
-const Button = ({ onClick }) => {
-  return (<button onClick={onClick}>Anecdote</button>)
+const Button = ({ onClick, text }) => {
+  return (<button onClick={onClick}>{text}</button>)
 }
 
 export default Button

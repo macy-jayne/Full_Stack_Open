@@ -12,9 +12,12 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-   
-  const [selected, setSelected] = useState(0)
+  
+  const randomVal = () => Math.floor(Math.random() * 8)
+  const [selected, setSelected] = useState(randomVal)
   const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0, 0, 0])
+  const [mostVotesIndex, setMostVotesIndex] = useState(0)
+  const [mostVotes, setMostVotes] = useState(0)
 
   const handleAnecdoteClick = () => {
     let rand = Math.floor(Math.random() * 8)
@@ -25,12 +28,20 @@ const App = () => {
   }
 
   const handleVote = () => {
+    const newIndex = selected
     const newVotes = {...votes}
-    newVotes[selected] += 1
+    newVotes[newIndex] += 1
     setVotes(newVotes)
+
+    if (newVotes[newIndex] >= mostVotes) {
+      setMostVotesIndex(newIndex)
+      setMostVotes(newVotes[newIndex])
+    }
  }
+
   return (
     <div>
+      <h1>Anecdote of The Day</h1>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Button onClick={handleAnecdoteClick} text={'New Anecdote'}/>
         <Button onClick={handleVote} text='Vote'/>
@@ -38,6 +49,9 @@ const App = () => {
       <br/>
       {anecdotes[selected]}
       <p>Votes: {votes[selected]}</p>
+      <h1>Anecdote With Most Votes</h1>
+      {anecdotes[mostVotesIndex]}
+      <p>Votes: {votes[mostVotesIndex]}</p>
     </div>
   )
 }

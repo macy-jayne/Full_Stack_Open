@@ -9,14 +9,16 @@ const Statistics = ({good, neutral, bad}) => {
     (total > 0 ?
     <div>
       <h2>Statistics</h2>
-      <div>
-        <StatsLine text='Good' stat={good}/>
-        <StatsLine text='Neutral' stat={neutral}/>
-        <StatsLine text='Bad' stat={bad}/>
-        <StatsLine text='Total Count' stat={total}/>
-        <StatsLine text='Average' stat={avg}/>
-        <StatsLine text='Positive' stat={pos}/>
-      </div>
+      <table>
+        <tbody>
+          <StatsLine text='Good' stat={good}/>
+          <StatsLine text='Neutral' stat={neutral}/>
+          <StatsLine text='Bad' stat={bad}/>
+          <StatsLine text='Total Count' stat={total}/>
+          <StatsLine text='Average' stat={avg}/>
+          <StatsLine text='Positive' stat={pos}/>
+        </tbody>
+      </table>
     </div> :
     <div><p>No feedback given</p></div>
     ))

@@ -1,9 +1,17 @@
+import '../CSS/Table.css'
+
 const StatsLine = ({ text, stat }) => {
 
   return (
     (text === 'Positive' ?
-      <p>{text}: {stat}%</p> :
-      <p>{text}: {stat}</p>
+      <tr>
+        <td>{text}</td> 
+        <td>{stat}%</td>
+      </tr> :
+      <tr>
+        <td>{text}</td> 
+        <td>{stat}</td>
+      </tr>
     ))
 }
 

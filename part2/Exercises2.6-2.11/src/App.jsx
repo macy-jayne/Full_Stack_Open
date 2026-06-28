@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import AddNewEntryForm from './Components/AddNewEntryForm'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
-import axios from 'axios'
+import personsService from './Services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,14 +12,12 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+    personsService
+      .getAll()
+      .then(initialPeople => {
+        setPersons(initialPeople)
       })
   }, [])
-  console.log('render', persons.length, 'persons')
 
   return (
     <div>
@@ -40,6 +38,7 @@ const App = () => {
       <h3>Numbers</h3>
       <Persons 
         persons={persons} 
+        setPersons={setPersons}
         showAll={showAll} 
         filterBy={filterBy}
       />

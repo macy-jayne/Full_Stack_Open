@@ -1,3 +1,5 @@
+import personsService from '../Services/persons'
+
 const AddNewEntryForm = ({
   persons, 
   setPersons, 
@@ -6,7 +8,6 @@ const AddNewEntryForm = ({
   newNum, 
   setNewNum
 }) => {
-
   const handleAdd = (event) => {
     event.preventDefault()
 
@@ -19,8 +20,22 @@ const AddNewEntryForm = ({
       person.name === newName)
 
     if (nameExists) {
-      alert(`${newName} is already in the Phonebook`)
-      return
+      const thePerson = persons.find(person => person.name === newName)
+      const personId = thePerson.id
+      if (newNum !== '' && newNum !== thePerson.number) {
+        if (window.confirm(`${newName} is already in the phonebook. Replace old number with a new one?`)) {
+          const newPerson = {...thePerson, number: newNum}
+          personsService
+            .update(personId, newPerson)
+            .then(returnedPerson => {
+              setPersons(persons.map(person => person.id === personId ? returnedPerson : person))
+              setNewName('')
+              setNewNum('')
+            })
+            return
+        }
+        return
+      }
     }
     if (newName === '') {
       alert(`Please enter an associated name`)
@@ -30,9 +45,13 @@ const AddNewEntryForm = ({
       alert(`Please enter an associated phone number`)
       return
     }
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNum('')
+    personsService
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNum('')
+      })
   }
 
   const handlePersonChange = (event) => {

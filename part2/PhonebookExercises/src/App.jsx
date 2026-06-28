@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import AddNewEntryForm from './Components/AddNewEntryForm'
+import Notification from './Components/Notification'
+import ErrorNotif from './Components/ErrorNotif'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
 import personsService from './Services/persons'
@@ -10,6 +12,8 @@ const App = () => {
   const [newNum, setNewNum] = useState('')
   const [filterBy, setFilterBy] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [notifMessage, setNotifMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personsService
@@ -22,6 +26,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <ErrorNotif message={errorMessage} />
+      <Notification message={notifMessage} />
       <Filter
         setFilterBy={setFilterBy} 
         setShowAll={setShowAll} 
@@ -34,6 +40,8 @@ const App = () => {
         setNewName={setNewName}
         newNum={newNum}
         setNewNum={setNewNum}
+        setNotifMessage={setNotifMessage}
+        setErrorMessage={setErrorMessage}
       />
       <h3>Numbers</h3>
       <Persons 

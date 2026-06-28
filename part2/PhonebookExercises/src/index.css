@@ -1,0 +1,19 @@
+.notif {
+  color: green;
+  background: lightgrey;
+  font-size: 4vh;
+  border-style: solid;
+  border-radius: 1rem;
+  padding: 3vh;
+  margin-bottom: 4vh;
+}
+
+.error {
+  color: red;
+  background: lightgrey;
+  font-size: 4vh;
+  border-style: solid;
+  border-radius: 1rem;
+  padding: 3vh;
+  margin-bottom: 4vh;
+}

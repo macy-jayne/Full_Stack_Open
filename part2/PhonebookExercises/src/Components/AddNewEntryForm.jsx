@@ -6,7 +6,9 @@ const AddNewEntryForm = ({
   newName, 
   setNewName, 
   newNum, 
-  setNewNum
+  setNewNum,
+  setNotifMessage,
+  setErrorMessage
 }) => {
   const handleAdd = (event) => {
     event.preventDefault()
@@ -22,15 +24,27 @@ const AddNewEntryForm = ({
     if (nameExists) {
       const thePerson = persons.find(person => person.name === newName)
       const personId = thePerson.id
+
       if (newNum !== '' && newNum !== thePerson.number) {
         if (window.confirm(`${newName} is already in the phonebook. Replace old number with a new one?`)) {
           const newPerson = {...thePerson, number: newNum}
+
           personsService
             .update(personId, newPerson)
             .then(returnedPerson => {
               setPersons(persons.map(person => person.id === personId ? returnedPerson : person))
               setNewName('')
               setNewNum('')
+            })
+            .catch(error => {
+              console.log(error)
+              setErrorMessage(
+                `${newName} was already removed from server`
+              )
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+              setPersons(persons.filter(p => p.id !== personId))
             })
             return
         }
@@ -49,8 +63,14 @@ const AddNewEntryForm = ({
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setNotifMessage(
+          `Added ${newName}`
+        )
         setNewName('')
         setNewNum('')
+        setTimeout(() => {
+          setNotifMessage(null)
+        }, 5000)
       })
   }
 

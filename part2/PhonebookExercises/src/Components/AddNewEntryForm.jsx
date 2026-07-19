@@ -72,6 +72,10 @@ const AddNewEntryForm = ({
           setNotifMessage(null)
         }, 5000)
       })
+      .catch(error => {
+        alert(error.response.data.error)
+        console.log(error.response.data.error)
+      })
   }
 
   const handlePersonChange = (event) => {

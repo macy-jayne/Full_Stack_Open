@@ -4,16 +4,16 @@
   font-size: 3vh;
   border-style: solid;
   border-radius: 1rem;
-  padding: 3vh;
+  padding: 2vh;
   margin-bottom: 4vh;
 }
 
 .error {
   color: red;
   background: lightgrey;
-  font-size: 4vh;
+  font-size: 3vh;
   border-style: solid;
   border-radius: 1rem;
-  padding: 3vh;
+  padding: 2vh;
   margin-bottom: 4vh;
 }
